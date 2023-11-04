@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  config:
+    image: tiogars/config:latest
+    container_name: config
+    hostname: config
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8888:8888
+    healthcheck:
+      test: "curl --fail --silent localhost:8888/actuator/health | grep UP || exit 1"
+      interval: 2s
+      timeout: 3s
+      retries: 5
+      start_period: 2s
+    volumes:
+      - ${CONFIG_FOLDER}:/usr/local/lib/config:ro

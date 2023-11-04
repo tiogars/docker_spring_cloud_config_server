@@ -1,0 +1,4 @@
+message: Hello from server (stage) !
+spring:
+    application:
+        name: my_application
